@@ -1,0 +1,14 @@
+name: Renamer
+author: ridan
+version: 1.3
+description: Edit items theire lore and name and more!
+main: me.ridan.renamer.Renamer
+commands:
+    renamer:
+        description: Main menu for renamer
+        command: /<command>
+permissions:
+    renamer.set:
+        default: op
+    renamer.setlore:
+        default: op
