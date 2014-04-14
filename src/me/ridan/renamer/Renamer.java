@@ -82,13 +82,13 @@ public class Renamer extends JavaPlugin {
 					return true;
 				}
 				String mes = "";
-				for(int i = 2; i < args.length; i++){
+				for(int i = 1; i < args.length; i++){
 					mes += args[i] + " ";
 				}
-				mes = args[1].replace("&", "§");
+				mes = mes.replace("&", "§");
 				mes = mes.replace("%player%", sender.getName());
-				mes = mes.replace(",,", " ");
 				String lore[] = mes.split("/n");
+				sender.sendMessage(lore.length + "");
 				ItemMeta im = p.getInventory().getItemInHand().getItemMeta();
 				ArrayList<String> lorelist = new ArrayList<String>();
 				for(int i = 0; i < lore.length; i++){
