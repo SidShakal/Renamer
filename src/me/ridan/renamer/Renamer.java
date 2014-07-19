@@ -89,7 +89,6 @@ public class Renamer extends JavaPlugin {
 				mes = mes.replace("&", "§");
 				mes = mes.replace("%player%", sender.getName());
 				String lore[] = mes.split("/n");
-				sender.sendMessage(lore.length + "");
 				ItemMeta im = p.getInventory().getItemInHand().getItemMeta();
 				ArrayList<String> lorelist = new ArrayList<String>();
 				for(int i = 0; i < lore.length; i++){
