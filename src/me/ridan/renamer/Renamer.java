@@ -52,12 +52,12 @@ public class Renamer extends JavaPlugin {
 					sender.sendMessage(ChatColor.DARK_GREEN + "Hand cannot be edited!");
 					return true;
 				}
-				args[1] = args[1].replace("&", "§");
 				ItemMeta im = p.getInventory().getItemInHand().getItemMeta();
 				String mes = args[1];
 				for(int i = 2; i < args.length; i++){
 					mes += " " + args[i];
 				}
+				mes = mes.replace("&", "§");
 				im.setDisplayName(mes);
 				p.getInventory().getItemInHand().setItemMeta(im);
 				return true;
