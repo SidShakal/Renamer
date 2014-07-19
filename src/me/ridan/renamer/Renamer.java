@@ -1,6 +1,8 @@
 package me.ridan.renamer;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,6 +15,27 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Renamer extends JavaPlugin {
+	
+	private Pattern singleAmpersandPattern = Pattern.compile("(?<!&)&(?!&)");
+	private String singleAmpersandReplacement = "§";
+	private Pattern doubleAmpersandPattern = Pattern.compile("&&");
+	private String doubleAmpersandReplacement = "&";
+	
+	private String handleAmpersands(String str){
+		// Replace lone ampersands ('&') in input with section symbols ('§'),
+		// unless an ampersand is followed by another ampersand, in which case
+		// replace the pair with just one ampersand.
+		// Then return the result.
+		String transformedStr = str;
+		
+		Matcher singleAmpersandMatcher = singleAmpersandPattern.matcher(transformedStr);
+		transformedStr = singleAmpersandMatcher.replaceAll(singleAmpersandReplacement);
+		
+		Matcher doubleAmpersandMatcher = doubleAmpersandPattern.matcher(transformedStr);
+		transformedStr = doubleAmpersandMatcher.replaceAll(doubleAmpersandReplacement);
+		
+		return transformedStr;
+	}
 	
 	public void onEnable(){
 		Bukkit.getServer().getLogger().info("[Renamer] Renamer enabled!");
@@ -57,7 +80,7 @@ public class Renamer extends JavaPlugin {
 				for(int i = 2; i < args.length; i++){
 					mes += " " + args[i];
 				}
-				mes = mes.replace("&", "§");
+				mes = handleAmpersands(mes);
 				im.setDisplayName(mes);
 				p.getInventory().getItemInHand().setItemMeta(im);
 				return true;
@@ -86,7 +109,7 @@ public class Renamer extends JavaPlugin {
 				for(int i = 2; i < args.length; i++){
 					mes += " " + args[i];
 				}
-				mes = mes.replace("&", "§");
+				mes = handleAmpersands(mes);
 				mes = mes.replace("%player%", sender.getName());
 				String lore[] = mes.split("\\\\n");
 				ItemMeta im = p.getInventory().getItemInHand().getItemMeta();
