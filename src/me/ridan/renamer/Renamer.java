@@ -50,14 +50,26 @@ public class Renamer extends JavaPlugin {
 		if(cmd.getName().equalsIgnoreCase("renamer")){
 			// MENU
 			if(args.length==0){
-				sender.sendMessage(ChatColor.AQUA + "=[Renamer]=");
-				sender.sendMessage(ChatColor.GREEN + "/renamer - Main menu");
-				sender.sendMessage(ChatColor.GREEN + "/renamer set - Set item's name");
-				sender.sendMessage(ChatColor.GREEN + "/renamer setlore - Set item's lore");
-				sender.sendMessage(ChatColor.GREEN + "/renamer unset - Unset item's name");
-				sender.sendMessage(ChatColor.GREEN + "/renamer unsetlore - Unset item's lore");
-				sender.sendMessage(ChatColor.GREEN + "/renamer help <command>");
-				return true;
+				if(sender.hasPermission("renamer.menu"))
+				{
+					sender.sendMessage(ChatColor.AQUA + "=[Renamer]=");
+					sender.sendMessage(ChatColor.GREEN + "/renamer - Main menu");
+					if(sender.hasPermission("renamer.set"))
+						sender.sendMessage(ChatColor.GREEN + "/renamer set - Set item's name");
+					if(sender.hasPermission("renamer.setlore"))
+						sender.sendMessage(ChatColor.GREEN + "/renamer setlore - Set item's lore");
+					if(sender.hasPermission("renamer.unset"))
+						sender.sendMessage(ChatColor.GREEN + "/renamer unset - Unset item's name");
+					if(sender.hasPermission("renamer.unsetlore"))
+						sender.sendMessage(ChatColor.GREEN + "/renamer unsetlore - Unset item's lore");
+					sender.sendMessage(ChatColor.GREEN + "/renamer help <command>");
+					return true;
+				}
+				else
+				{
+					sender.sendMessage(ChatColor.RED + "You don't have permission!");
+					return true;
+				}
 			}
 			
 			// SET
@@ -88,6 +100,7 @@ public class Renamer extends JavaPlugin {
 				mes = handleAmpersands(mes);
 				im.setDisplayName(mes);
 				p.getInventory().getItemInHand().setItemMeta(im);
+				
 				sender.sendMessage(ChatColor.DARK_GREEN + "Name set!");
 				return true;
 			}
@@ -187,24 +200,44 @@ public class Renamer extends JavaPlugin {
 					return true;
 				}
 				if(args[1].equalsIgnoreCase("set")){
-					sender.sendMessage(ChatColor.DARK_GREEN + "Command set, Permission: renamer.set, Supports item color (& symbol)");
-					sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer set <name>");
+					if(sender.hasPermission("renamer.set")){
+						sender.sendMessage(ChatColor.DARK_GREEN + "Command set, Permission: renamer.set, Supports item color (& symbol)");
+						sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer set <name>");
+					}
+					else{
+						sender.sendMessage(ChatColor.RED + "You don't have permission!");
+					}
 					return true;
 				}
 				if(args[1].equalsIgnoreCase("setlore")){
-					sender.sendMessage(ChatColor.DARK_GREEN + "Command setlore, Permission: renamer.setlore, Supports item color (& symbol)");
-					sender.sendMessage(ChatColor.DARK_GREEN + "For next line, type \\n in the name. %player% gets replaced with sender's name");
-					sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer setlore <lore>");
+					if(sender.hasPermission("renamer.setlore")){
+						sender.sendMessage(ChatColor.DARK_GREEN + "Command setlore, Permission: renamer.setlore, Supports item color (& symbol)");
+						sender.sendMessage(ChatColor.DARK_GREEN + "For next line, type \\n in the name. %player% gets replaced with sender's name");
+						sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer setlore <lore>");
+					}
+					else{
+						sender.sendMessage(ChatColor.RED + "You don't have permission!");
+					}
 					return true;
 				}
 				if(args[1].equalsIgnoreCase("unset")){
-					sender.sendMessage(ChatColor.DARK_GREEN + "Command unset, Permission: renamer.unset");
-					sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer unset");
+					if(sender.hasPermission("renamer.unset")){
+						sender.sendMessage(ChatColor.DARK_GREEN + "Command unset, Permission: renamer.unset");
+						sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer unset");
+					}
+					else{
+						sender.sendMessage(ChatColor.RED + "You don't have permission!");
+					}
 					return true;
 				}
 				if(args[1].equalsIgnoreCase("unsetlore")){
-					sender.sendMessage(ChatColor.DARK_GREEN + "Command unsetlore, Permission: renamer.unsetlore");
-					sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer unsetlore");
+					if(sender.hasPermission("renamer.unsetlore")){
+						sender.sendMessage(ChatColor.DARK_GREEN + "Command unsetlore, Permission: renamer.unsetlore");
+						sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer unsetlore");
+					}
+					else{
+						sender.sendMessage(ChatColor.RED + "You don't have permission!");
+					}
 					return true;
 				}
 				sender.sendMessage(ChatColor.RED + "" + args[1] + " not found! Use: set, setlore, unset, unsetlore");
