@@ -72,7 +72,7 @@ public class Renamer extends JavaPlugin {
 					return true;
 				}
 				if(args.length<2){
-					sender.sendMessage(ChatColor.RED + "Please specify a lore! (For next line, type /n)");
+					sender.sendMessage(ChatColor.RED + "Please specify a lore! (For next line, type \\n)");
 					return true;
 				}
 				
@@ -88,7 +88,7 @@ public class Renamer extends JavaPlugin {
 				}
 				mes = mes.replace("&", "§");
 				mes = mes.replace("%player%", sender.getName());
-				String lore[] = mes.split("/n");
+				String lore[] = mes.split("\\\\n");
 				ItemMeta im = p.getInventory().getItemInHand().getItemMeta();
 				ArrayList<String> lorelist = new ArrayList<String>();
 				for(int i = 0; i < lore.length; i++){
@@ -111,7 +111,7 @@ public class Renamer extends JavaPlugin {
 				}
 				if(args[1].equalsIgnoreCase("setlore")){
 					sender.sendMessage(ChatColor.DARK_GREEN + "Command setlore, Permission: renamer.setlore, Supports item color (& symbol)");
-					sender.sendMessage(ChatColor.DARK_GREEN + "For next line, type /n in the name. %player% gets replaced with sender's name");
+					sender.sendMessage(ChatColor.DARK_GREEN + "For next line, type \\n in the name. %player% gets replaced with sender's name");
 					sender.sendMessage(ChatColor.DARK_GREEN + ",, gets replaced with a space");
 					sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer setlore <lore>");
 					return true;
