@@ -48,6 +48,7 @@ public class Renamer extends JavaPlugin {
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		
 		if(cmd.getName().equalsIgnoreCase("renamer")){
+			// MENU
 			if(args.length==0){
 				sender.sendMessage(ChatColor.AQUA + "=[Renamer]=");
 				sender.sendMessage(ChatColor.GREEN + "/renamer - Main menu");
@@ -56,6 +57,8 @@ public class Renamer extends JavaPlugin {
 				sender.sendMessage(ChatColor.GREEN + "/renamer help <command>");
 				return true;
 			}
+			
+			// SET
 			if(args[0].equalsIgnoreCase("set")){
 				if(!sender.hasPermission("renamer.set")){
 					sender.sendMessage(ChatColor.RED + "You don't have permission!");
@@ -86,6 +89,8 @@ public class Renamer extends JavaPlugin {
 				sender.sendMessage(ChatColor.DARK_GREEN + "Name set!");
 				return true;
 			}
+			
+			// SETLORE
 			if(args[0].equalsIgnoreCase("setlore")){
 				if(!sender.hasPermission("renamer.setlore")){
 					sender.sendMessage(ChatColor.RED + "You don't have permission!");
@@ -123,6 +128,8 @@ public class Renamer extends JavaPlugin {
 				sender.sendMessage(ChatColor.DARK_GREEN + "Lore set!");
 				return true;
 			}
+			
+			// HELP
 			if(args[0].equalsIgnoreCase("help")){
 				if(args.length<2){
 					sender.sendMessage(ChatColor.RED + "Please specify a command!");
