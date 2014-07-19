@@ -51,18 +51,18 @@ public class Renamer extends JavaPlugin {
 			if(args.length==0){
 				sender.sendMessage(ChatColor.AQUA + "=[Renamer]=");
 				sender.sendMessage(ChatColor.GREEN + "/renamer - Main menu");
-				sender.sendMessage(ChatColor.GREEN + "/renamer set - Set items name");
-				sender.sendMessage(ChatColor.GREEN + "/renamer setlore - Set the lore of an item");
+				sender.sendMessage(ChatColor.GREEN + "/renamer set - Set item's name");
+				sender.sendMessage(ChatColor.GREEN + "/renamer setlore - Set item's lore");
 				sender.sendMessage(ChatColor.GREEN + "/renamer help <command>");
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("set")){
 				if(!sender.hasPermission("renamer.set")){
-					sender.sendMessage(ChatColor.RED + "You dont have permission!");
+					sender.sendMessage(ChatColor.RED + "You don't have permission!");
 					return true;
 				}
 				if(!(sender instanceof Player)){
-					sender.sendMessage("Console cannot rename a item!");
+					sender.sendMessage("Console cannot rename an item!");
 					return true;
 				}
 				if(args.length<2){
@@ -83,15 +83,16 @@ public class Renamer extends JavaPlugin {
 				mes = handleAmpersands(mes);
 				im.setDisplayName(mes);
 				p.getInventory().getItemInHand().setItemMeta(im);
+				sender.sendMessage(ChatColor.DARK_GREEN + "Name set!");
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("setlore")){
 				if(!sender.hasPermission("renamer.setlore")){
-					sender.sendMessage(ChatColor.RED + "You dont have permission!");
+					sender.sendMessage(ChatColor.RED + "You don't have permission!");
 					return true;
 				}
 				if(!(sender instanceof Player)){
-					sender.sendMessage("Console cannot set lore of a item!");
+					sender.sendMessage("Console cannot set lore of an item!");
 					return true;
 				}
 				if(args.length<2){
@@ -129,7 +130,7 @@ public class Renamer extends JavaPlugin {
 				}
 				if(args[1].equalsIgnoreCase("set")){
 					sender.sendMessage(ChatColor.DARK_GREEN + "Command set, Permission: renamer.set, Supports item color (& symbol)");
-					sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer set <Name>");
+					sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer set <name>");
 					return true;
 				}
 				if(args[1].equalsIgnoreCase("setlore")){
