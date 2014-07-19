@@ -112,7 +112,6 @@ public class Renamer extends JavaPlugin {
 				if(args[1].equalsIgnoreCase("setlore")){
 					sender.sendMessage(ChatColor.DARK_GREEN + "Command setlore, Permission: renamer.setlore, Supports item color (& symbol)");
 					sender.sendMessage(ChatColor.DARK_GREEN + "For next line, type \\n in the name. %player% gets replaced with sender's name");
-					sender.sendMessage(ChatColor.DARK_GREEN + ",, gets replaced with a space");
 					sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer setlore <lore>");
 					return true;
 				}
