@@ -54,9 +54,9 @@ public class Renamer extends JavaPlugin {
 				}
 				args[1] = args[1].replace("&", "§");
 				ItemMeta im = p.getInventory().getItemInHand().getItemMeta();
-				String mes = "";
-				for(int i = 1; i < args.length; i++){
-					mes += args[i] + " ";
+				String mes = args[1];
+				for(int i = 2; i < args.length; i++){
+					mes += " " + args[i];
 				}
 				im.setDisplayName(mes);
 				p.getInventory().getItemInHand().setItemMeta(im);
@@ -82,9 +82,9 @@ public class Renamer extends JavaPlugin {
 					sender.sendMessage(ChatColor.DARK_GREEN + "Hand cannot be edited!");
 					return true;
 				}
-				String mes = "";
-				for(int i = 1; i < args.length; i++){
-					mes += args[i] + " ";
+				String mes = args[1];
+				for(int i = 2; i < args.length; i++){
+					mes += " " + args[i];
 				}
 				mes = mes.replace("&", "§");
 				mes = mes.replace("%player%", sender.getName());
