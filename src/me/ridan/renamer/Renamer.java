@@ -54,6 +54,8 @@ public class Renamer extends JavaPlugin {
 				sender.sendMessage(ChatColor.GREEN + "/renamer - Main menu");
 				sender.sendMessage(ChatColor.GREEN + "/renamer set - Set item's name");
 				sender.sendMessage(ChatColor.GREEN + "/renamer setlore - Set item's lore");
+				sender.sendMessage(ChatColor.GREEN + "/renamer unset - Unset item's name");
+				sender.sendMessage(ChatColor.GREEN + "/renamer unsetlore - Unset item's lore");
 				sender.sendMessage(ChatColor.GREEN + "/renamer help <command>");
 				return true;
 			}
@@ -129,6 +131,55 @@ public class Renamer extends JavaPlugin {
 				return true;
 			}
 			
+			// UNSET
+			if(args[0].equalsIgnoreCase("unset")){
+				if(!sender.hasPermission("renamer.unset")){
+					sender.sendMessage(ChatColor.RED + "You don't have permission!");
+					return true;
+				}
+				if(!(sender instanceof Player)){
+					sender.sendMessage("Console cannot remove an item's name!");
+					return true;
+				}
+				Player p = (Player) sender;
+				ItemStack item = p.getItemInHand();
+				if(item == null || item.getType() == Material.AIR){
+					sender.sendMessage(ChatColor.DARK_GREEN + "Hand cannot be edited!");
+					return true;
+				}
+				ItemMeta im = p.getInventory().getItemInHand().getItemMeta();
+				im.setDisplayName(null);
+				p.getInventory().getItemInHand().setItemMeta(im);
+				sender.sendMessage(ChatColor.DARK_GREEN + "Name unset!");
+				return true;
+			}
+			
+			// UNSETLORE
+			if(args[0].equalsIgnoreCase("unsetlore")){
+				if(!sender.hasPermission("renamer.unsetlore")){
+					sender.sendMessage(ChatColor.RED + "You don't have permission!");
+					return true;
+				}
+				if(!(sender instanceof Player)){
+					sender.sendMessage("Console cannot unset lore of an item!");
+					return true;
+				}
+				
+				Player p = (Player) sender;
+				ItemStack item = p.getItemInHand();
+				if(item == null || item.getType() == Material.AIR){
+					sender.sendMessage(ChatColor.DARK_GREEN + "Hand cannot be edited!");
+					return true;
+				}
+				
+				ItemMeta im = p.getInventory().getItemInHand().getItemMeta();
+				im.setLore(null);
+				p.getInventory().getItemInHand().setItemMeta(im);
+				
+				sender.sendMessage(ChatColor.DARK_GREEN + "Lore unset!");
+				return true;
+			}
+			
 			// HELP
 			if(args[0].equalsIgnoreCase("help")){
 				if(args.length<2){
@@ -146,7 +197,17 @@ public class Renamer extends JavaPlugin {
 					sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer setlore <lore>");
 					return true;
 				}
-				sender.sendMessage(ChatColor.RED + "" + args[1] + " not found! Use: set, setlore");
+				if(args[1].equalsIgnoreCase("unset")){
+					sender.sendMessage(ChatColor.DARK_GREEN + "Command unset, Permission: renamer.unset");
+					sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer unset");
+					return true;
+				}
+				if(args[1].equalsIgnoreCase("unsetlore")){
+					sender.sendMessage(ChatColor.DARK_GREEN + "Command unsetlore, Permission: renamer.unsetlore");
+					sender.sendMessage(ChatColor.DARK_GREEN + "Usage: /renamer unsetlore");
+					return true;
+				}
+				sender.sendMessage(ChatColor.RED + "" + args[1] + " not found! Use: set, setlore, unset, unsetlore");
 				return true;
 			}
 		}
