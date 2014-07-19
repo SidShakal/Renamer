@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -47,7 +48,7 @@ public class Renamer extends JavaPlugin {
 				}
 				Player p = (Player) sender;
 				ItemStack item = p.getItemInHand();
-				if(item == null || item.getTypeId() == 0){
+				if(item == null || item.getType() == Material.AIR){
 					sender.sendMessage(ChatColor.DARK_GREEN + "Hand cannot be edited!");
 					return true;
 				}
@@ -77,7 +78,7 @@ public class Renamer extends JavaPlugin {
 				
 				Player p = (Player) sender;
 				ItemStack item = p.getItemInHand();
-				if(item == null || item.getTypeId() == 0){
+				if(item == null || item.getType() == Material.AIR){
 					sender.sendMessage(ChatColor.DARK_GREEN + "Hand cannot be edited!");
 					return true;
 				}
